@@ -18,6 +18,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
    
   }
+  goToProducts() {
+    console.log("product")
+    this.router.navigate(['products'])
+
+  }
+  goToCart() {
+    this.router.navigate(['cart'])
+    console.log("cart")
+
+  }
 
 
 }

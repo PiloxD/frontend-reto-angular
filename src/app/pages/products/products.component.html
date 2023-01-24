@@ -1,0 +1,47 @@
+<div class="products">
+  <span class="products_list_title"><h1>Productos</h1></span>
+  <ul class="products_list">
+    <li
+      class="cards"
+      *ngFor="
+        let product of products
+          | paginate : { itemsPerPage: maxPage, currentPage: page }
+      "
+    >
+      <div class="container">
+        <div class="card">
+          <div class="imgBx">
+            <img src="{{ product.imgUrl }}" />
+          </div>
+          <div class="contentBx">
+            <h2>{{ product.name }}</h2>
+            <form
+              class="create_category_box-form"
+              (ngSubmit)="addToCart(body)"
+              [formGroup]="addForm"
+            >
+              <label for="quantity">Cantidad: </label>
+              <input
+                type="number"
+                min="{{ product.min }}"
+                max="{{ product.max }}"
+                id="quantity"
+                name="quantity"
+                formControlName="quantity"
+                required
+              />
+              <button type="submit" [disabled]="addForm.invalid">
+                Agregar al carrito
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <pagination-controls
+    (pageChange)="page = $event"
+    previousLabel="Atrás"
+    nextLabel="Siguiente"
+  ></pagination-controls>
+</div>
