@@ -6,16 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { CartComponent } from './pages/cart/cart.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    NavbarComponent,
-    CartComponent,
   ],
   imports: [
     BrowserModule,

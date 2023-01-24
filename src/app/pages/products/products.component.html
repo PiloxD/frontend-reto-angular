@@ -1,13 +1,18 @@
-<div class="products">
-  <span class="products_list_title"><h1>Productos</h1></span>
-  <ul class="products_list">
-    <li
+<div>
+  <nav>
+    <img class="nav_logo"  src="/assets/logo-sofka-blanco-1.png"  alt="logo sofka" />
+    <img  class="nav_menu"(click)="openCart()" src="/assets/cart-icon.svg" >
+  </nav>
+  <div class="products">
+    <span class="products_list_title"><h1>Productos</h1></span>
+    <ul class="products_list">
+      <li
       class="cards"
       *ngFor="
-        let product of products
-          | paginate : { itemsPerPage: maxPage, currentPage: page }
+      let product of products
+      | paginate : { itemsPerPage: maxPage, currentPage: page }
       "
-    >
+      >
       <div class="container">
         <div class="card">
           <div class="imgBx">
@@ -15,33 +20,51 @@
           </div>
           <div class="contentBx">
             <h2>{{ product.name }}</h2>
-            <form
+            <h2>ID: {{ product.id }}</h2>
+            <div class="input_container">
+              <form
               class="create_category_box-form"
-              (ngSubmit)="addToCart(body)"
+              (ngSubmit)="addToCart(body, product.id, product.name)"
               [formGroup]="addForm"
-            >
-              <label for="quantity">Cantidad: </label>
-              <input
-                type="number"
-                min="{{ product.min }}"
-                max="{{ product.max }}"
-                id="quantity"
-                name="quantity"
-                formControlName="quantity"
-                required
+              >
+              <label for="quantityForm">Cantidad:</label>
+              <input class="inputquantity"
+              placeholder="Mínimo {{product.min}} y máximo {{product.max}}"
+              type="number"
+              min="{{ product.min }}"
+              max="{{ product.max }}"
+              id="quantityForm"
+              name="quantityForm"
+              formControlName="quantityForm"
+              required
               />
-              <button type="submit" [disabled]="addForm.invalid">
-                Agregar al carrito
+              <button  class="botoncard" type="submit">
+                Agregar
               </button>
             </form>
           </div>
         </div>
       </div>
+    </div>
+  </li>
+</ul>
+<pagination-controls
+(pageChange)="page = $event"
+previousLabel="Atrás"
+nextLabel="Siguiente"
+></pagination-controls>
+</div>
+</div>
+
+<div class="modal" *ngIf="showCart">
+  <div class="modal_body" >
+    <span class="modal_body-title">CARRITO DE COMPRAS</span>
+    <li class="modal_body-msj" *ngFor="
+    let itemCart of items">
+      <h4>{{itemCart.name}}</h4>
+      <h5>CANTIDAD: {{itemCart.quantity}}</h5>
+
     </li>
-  </ul>
-  <pagination-controls
-    (pageChange)="page = $event"
-    previousLabel="Atrás"
-    nextLabel="Siguiente"
-  ></pagination-controls>
+      <button (click)="showCart = false" class="modal_body-btn btn_ok">COMPRAR</button>
+  </div>
 </div>
