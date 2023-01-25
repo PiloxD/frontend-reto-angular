@@ -18,5 +18,13 @@ export class EndpointsService {
     return this.http.post(`${environment.host.createCartEndpoint}`, { ...cart });
   }
 
+  createProductService(product: Product) {
+    return this.http.post(`${environment.host.createProductEndpoint}`, { ...product });
+  }
+
+  deleteProductById(id: string) {
+    return this.http.delete(`${environment.host.deleteProductEndpoint}/${id}`);
+  }
+
 
 }

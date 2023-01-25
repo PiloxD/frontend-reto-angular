@@ -8,7 +8,11 @@
     <img class="nav_menu" (click)="openCart()" src="/assets/cart-icon.svg" />
   </nav>
   <div class="products">
-    <span class="products_list_title"><h1>Productos</h1></span>
+    <span class="products_list_title"
+      ><h1>Productos</h1>
+    </span>
+    <button class="butoncrear" (click)="revealCreateProduct()"><h3>CREAR PRODUCTO</h3></button>
+
     <ul class="products_list">
       <li
         class="cards"
@@ -24,7 +28,7 @@
             </div>
             <div class="contentBx">
               <h2>{{ product.name }}</h2>
-              <h2>ID: {{ product.id }}</h2>
+                <img class="nav_menu" src="/assets/delete.svg"  (click)="deleteProduct(product.id)" />
               <div class="input_container">
                 <form
                   class="create_category_box-form"
@@ -67,7 +71,11 @@
       <h5>CANTIDAD: {{itemCart.quantity}}</h5>
     </li>
     <div>
-      <form  class="formcart" [formGroup]="buyForm" (ngSubmit)="createCart(bodyCart)">
+      <form
+        class="formcart"
+        [formGroup]="buyForm"
+        (ngSubmit)="createCart(bodyCart)"
+      >
         <label for="idTypeControl">TIPO DE DOCUMENTO:</label>
         <input
           class="idTypeControl"
@@ -95,12 +103,84 @@
           formControlName="clientNameControl"
           required
         />
-        <button
-          type="submit"
-          class="modal_body-btn btn_ok"
-        >
-          COMPRAR
-        </button>
+        <button type="submit" class="modal_body-btn btn_ok">COMPRAR</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" *ngIf="showCreateForm">
+  <div class="modal_body">
+    <span class="modal_body-title">CREAR PRODUCTO</span>
+    <div>
+      <form
+        class="formcart"
+        [formGroup]="createProductForm"
+        (ngSubmit)="createProduct(bodyProduct)"
+      >
+        <label for="idControl">ID:</label>
+        <input
+          class="idControl"
+          type="text"
+          id="idControl"
+          name="idControl"
+          formControlName="idControl"
+          required
+        />
+        <label for="nameControl">NOMBRE:</label>
+        <input
+          class="nameControl"
+          type="text"
+          id="nameControl"
+          name="nameControl"
+          formControlName="nameControl"
+          required
+        />
+        <label for="inInventaryControl">INVENTARIO:</label>
+        <input
+          class="inInventaryControl"
+          type="number"
+          id="inInventaryControl"
+          name="inInventaryControl"
+          formControlName="inInventaryControl"
+          required
+        />
+        <label for="enabledControl">DISPONIBLE:</label>
+        <input
+          class="enabledControl"
+          type="text"
+          id="enabledControl"
+          name="enabledControl"
+          formControlName="enabledControl"
+          required
+        />
+        <label for="minControl">MINIMO DE COMPRA:</label>
+        <input
+          class="minControl"
+          type="number"
+          id="minControl"
+          name="minControl"
+          formControlName="minControl"
+          required
+        />
+        <label for="maxControl">MÁXIMO DE COMPRA:</label>
+        <input
+          class="maxControl"
+          type="number"
+          id="maxControl"
+          name="maxControl"
+          formControlName="maxControl"
+          required
+        />
+        <label for="imgUrlControl">URL DE LA IMAGEN:</label>
+        <input
+          class="imgUrlControl"
+          type="text"
+          id="imgUrlControl"
+          name="imgUrlControl"
+          formControlName="imgUrlControl"
+          required
+        />
+        <button type="submit" class="modal_body-btn btn_ok">CREAR</button>
       </form>
     </div>
   </div>

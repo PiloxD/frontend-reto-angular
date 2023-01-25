@@ -214,7 +214,7 @@ body {
 }
 .input_container {
   display: grid;
-  padding-top: 5%;
+  padding-top:3%;
   align-items: center;
   justify-items: center;
   text-align: center;
@@ -277,4 +277,16 @@ nav {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.butoncrear{
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  border-radius: 15%;
+
+}
+.imgdelete{
+  position: absolute;
+  z-index: 999;
 }

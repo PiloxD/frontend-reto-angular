@@ -17,13 +17,16 @@ import { environment } from 'src/environments/environments';
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
   cart: Cart = new Cart();
+  newProduct: Product = new Product();
   itemInCart: ItemInCart = new ItemInCart();
   body: NgForm;
   bodyCart: NgForm;
+  bodyProduct: NgForm;
   idForm: string;
   quantityA: number;
   nameForm: string;
   showCart: boolean = false;
+  showCreateForm: boolean = false;
   page: number = 1;
   maxPage = environment.paginationmax;
   items: Array<ItemInCart> = new Array()
@@ -38,6 +41,16 @@ export class ProductsComponent implements OnInit {
     idTypeControl: new FormControl(),
     documentIdControl: new FormControl(),
     clientNameControl: new FormControl(),
+  });
+
+  createProductForm = new FormGroup({
+    idControl: new FormControl(),
+    nameControl: new FormControl(),
+    inInventaryControl: new FormControl(),
+    enabledControl: new FormControl(),
+    minControl: new FormControl(),
+    maxControl: new FormControl(),
+    imgUrlControl: new FormControl(),
   });
 
   constructor(
@@ -87,6 +100,43 @@ export class ProductsComponent implements OnInit {
         alert('Compra finalizada')
       }
     })
+  }
+  deleteProduct(id: string){
+    this.service.deleteProductById(id).subscribe({
+      complete: () => {
+        alert('eliminado')
+      }
+    })
+    
+  }
+
+  createProduct(res: any){
+    const idControlValue = this.createProductForm.get('idControl')
+    const nameControlValue = this.createProductForm.get('nameControl')
+    const inInventaryControlValue = this.createProductForm.get('inInventaryControl')
+    const enabledControlValue = this.createProductForm.get('enabledControl')
+    const minControlValue = this.createProductForm.get('minControl')
+    const maxControlValue = this.createProductForm.get('maxControl')
+    const imgUrlControlValue = this.createProductForm.get('imgUrlControl')
+
+    this.service.createProductService({
+      id: idControlValue?.value,
+      name: nameControlValue?.value,
+      inInventary: inInventaryControlValue?.value,
+      enabled: enabledControlValue?.value,
+      min: minControlValue?.value,
+      max: maxControlValue?.value,
+      imgUrl: imgUrlControlValue?.value
+    }).subscribe({
+      complete: () => {
+        alert('PRODUCTO CREADO')
+      }
+    })
+    this.showCreateForm = !this.showCreateForm
+  }
+
+  revealCreateProduct() {
+    this.showCreateForm = !this.showCreateForm
   }
 
 }
