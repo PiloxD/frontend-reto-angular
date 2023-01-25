@@ -1,27 +1,20 @@
 # Frontend
+El home del aplicativo es la sección de productos, tiene la siguiente vista:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+![1](https://user-images.githubusercontent.com/87391163/214466630-fc3d251b-402c-455c-8798-de5fe2fdad04.png)
 
-## Development server
+![2](https://user-images.githubusercontent.com/87391163/214467064-0c7b59b7-6c77-463f-af86-aadffef6affd.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Allí encontrarás las siguientes funcionalidades: 
+- Visualizar todos los productos disponibles con su respectiva infomación, están divididos en 4 productos por página (pagination).
+- Pasa el cursor del mouse sobre cualquier producto para ver los detalles y agregar al carrito.
+- En la parte superior en contrarás el botón para ver el carrito de compras.
+- Click en el ícono de eliminar para eliminar producto.
+- Click en el cotón de crear producto para agregar uno nuevo.
+- Para enviar la compra debes ingresar al carrito y llenar tus datos, luego la compra se hará efectiva.
+![3](https://user-images.githubusercontent.com/87391163/214467302-64c900e5-b745-4026-980d-bd2329b9fb92.png)
+![4](https://user-images.githubusercontent.com/87391163/214467307-a2dfc1c2-91f3-468e-b041-93b6379fbcec.png)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Proyecto desarrollado en Angular
+Por: Andrés Díaz
