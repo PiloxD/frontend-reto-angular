@@ -270,5 +270,11 @@ nav {
   90% {
       transform: rotateZ(-5deg);
   }
+
 }
 
+.formcart{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

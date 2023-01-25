@@ -192,6 +192,7 @@ form label {
     padding: 14px;
     border-radius: var(--border-radius_gen);
     text-align: center;
+    overflow-y: scroll;
 
     animation: swipe-up 0.4s linear 1;
 }

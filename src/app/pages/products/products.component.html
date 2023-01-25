@@ -1,70 +1,107 @@
 <div>
   <nav>
-    <img class="nav_logo"  src="/assets/logo-sofka-blanco-1.png"  alt="logo sofka" />
-    <img  class="nav_menu"(click)="openCart()" src="/assets/cart-icon.svg" >
+    <img
+      class="nav_logo"
+      src="/assets/logo-sofka-blanco-1.png"
+      alt="logo sofka"
+    />
+    <img class="nav_menu" (click)="openCart()" src="/assets/cart-icon.svg" />
   </nav>
   <div class="products">
     <span class="products_list_title"><h1>Productos</h1></span>
     <ul class="products_list">
       <li
-      class="cards"
-      *ngFor="
-      let product of products
-      | paginate : { itemsPerPage: maxPage, currentPage: page }
-      "
+        class="cards"
+        *ngFor="
+          let product of products
+            | paginate : { itemsPerPage: maxPage, currentPage: page }
+        "
       >
-      <div class="container">
-        <div class="card">
-          <div class="imgBx">
-            <img src="{{ product.imgUrl }}" />
-          </div>
-          <div class="contentBx">
-            <h2>{{ product.name }}</h2>
-            <h2>ID: {{ product.id }}</h2>
-            <div class="input_container">
-              <form
-              class="create_category_box-form"
-              (ngSubmit)="addToCart(body, product.id, product.name)"
-              [formGroup]="addForm"
-              >
-              <label for="quantityForm">Cantidad:</label>
-              <input class="inputquantity"
-              placeholder="Mínimo {{product.min}} y máximo {{product.max}}"
-              type="number"
-              min="{{ product.min }}"
-              max="{{ product.max }}"
-              id="quantityForm"
-              name="quantityForm"
-              formControlName="quantityForm"
-              required
-              />
-              <button  class="botoncard" type="submit">
-                Agregar
-              </button>
-            </form>
+        <div class="container">
+          <div class="card">
+            <div class="imgBx">
+              <img src="{{ product.imgUrl }}" />
+            </div>
+            <div class="contentBx">
+              <h2>{{ product.name }}</h2>
+              <h2>ID: {{ product.id }}</h2>
+              <div class="input_container">
+                <form
+                  class="create_category_box-form"
+                  (ngSubmit)="addToCart(body, product.id, product.name)"
+                  [formGroup]="addForm"
+                >
+                  <label for="quantityForm">Cantidad:</label>
+                  <input
+                    class="inputquantity"
+                    placeholder="Mínimo {{product.min}} y máximo {{product.max}}"
+                    type="number"
+                    min="{{ product.min }}"
+                    max="{{ product.max }}"
+                    id="quantityForm"
+                    name="quantityForm"
+                    formControlName="quantityForm"
+                    required
+                  />
+                  <button class="botoncard" type="submit">Agregar</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </li>
-</ul>
-<pagination-controls
-(pageChange)="page = $event"
-previousLabel="Atrás"
-nextLabel="Siguiente"
-></pagination-controls>
-</div>
+      </li>
+    </ul>
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Atrás"
+      nextLabel="Siguiente"
+    ></pagination-controls>
+  </div>
 </div>
 
 <div class="modal" *ngIf="showCart">
-  <div class="modal_body" >
+  <div class="modal_body">
     <span class="modal_body-title">CARRITO DE COMPRAS</span>
-    <li class="modal_body-msj" *ngFor="
-    let itemCart of items">
+    <li class="modal_body-msj" *ngFor="let itemCart of items">
       <h4>{{itemCart.name}}</h4>
       <h5>CANTIDAD: {{itemCart.quantity}}</h5>
-
     </li>
-      <button (click)="showCart = false" class="modal_body-btn btn_ok">COMPRAR</button>
+    <div>
+      <form  class="formcart" [formGroup]="buyForm" (ngSubmit)="createCart(bodyCart)">
+        <label for="idTypeControl">TIPO DE DOCUMENTO:</label>
+        <input
+          class="idTypeControl"
+          type="text"
+          id="idTypeControl"
+          name="idTypeControl"
+          formControlName="idTypeControl"
+          required
+        />
+        <label for="documentIdControl">NÚMERO DE DOCUMENTO:</label>
+        <input
+          class="documentIdControl"
+          type="number"
+          id="documentIdControl"
+          name="documentIdControl"
+          formControlName="documentIdControl"
+          required
+        />
+        <label for="clientNameControl">NOMBRE:</label>
+        <input
+          class="clientNameControl"
+          type="text"
+          id="clientNameControl"
+          name="clientNameControl"
+          formControlName="clientNameControl"
+          required
+        />
+        <button
+          type="submit"
+          class="modal_body-btn btn_ok"
+        >
+          COMPRAR
+        </button>
+      </form>
+    </div>
   </div>
 </div>

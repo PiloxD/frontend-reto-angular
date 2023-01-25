@@ -16,9 +16,10 @@ import { environment } from 'src/environments/environments';
 
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  cart: Cart[] = [];
+  cart: Cart = new Cart();
   itemInCart: ItemInCart = new ItemInCart();
   body: NgForm;
+  bodyCart: NgForm;
   idForm: string;
   quantityA: number;
   nameForm: string;
@@ -26,9 +27,17 @@ export class ProductsComponent implements OnInit {
   page: number = 1;
   maxPage = environment.paginationmax;
   items: Array<ItemInCart> = new Array()
-
+  idTypeValue: string;
+  documentIdValue: number;
+  clientNameValue: string;
   addForm = new FormGroup({
     quantityForm: new FormControl(),
+  });
+
+  buyForm = new FormGroup({
+    idTypeControl: new FormControl(),
+    documentIdControl: new FormControl(),
+    clientNameControl: new FormControl(),
   });
 
   constructor(
@@ -52,10 +61,32 @@ export class ProductsComponent implements OnInit {
     this.nameForm = nameSelected
     this.itemInCart= {id: this.idForm, name: this.nameForm, quantity: this.quantityA}
     this.items.push(this.itemInCart)
+    alert('Producto agregado')
+
   }
 
   openCart() {
     this.showCart = !this.showCart
+  }
+  createCart(bodyCart: NgForm){
+    const idTypeControlGET = this.buyForm.get('idTypeControl')
+    const documentIdControlGET = this.buyForm.get('documentIdControl')
+    const clientNameControlGET = this.buyForm.get('clientNameControl')
+    this.idTypeValue = idTypeControlGET?.value
+    this.documentIdValue = documentIdControlGET?.value
+    this.clientNameValue = clientNameControlGET?.value
+    this.cart = {idType: this.idTypeValue, documentId: this.documentIdValue, clientName: this.clientNameValue, clientSelection: this.items}
+    console.log("carrito: ",this.cart)
+    this.saveCart()
+    this.showCart = !this.showCart
+  }
+
+  saveCart() {
+    this.service.createCartService(this.cart).subscribe({
+      complete: () => {
+        alert('Compra finalizada')
+      }
+    })
   }
 
 }
